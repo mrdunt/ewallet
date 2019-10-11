@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Hash;
 use Auth;
 use App\User;
 use Illuminate\Http\Request;
+use DB,Session;
 
 class UserController extends Controller
 {
@@ -16,7 +17,14 @@ class UserController extends Controller
     public function index(Request $request)
     {  
         if ($request->session()->has('user')) {
-            return view('home');
+            $email = Session::get('user')->email;
+             $data = User::where('email', $email)           
+                ->first();
+            $transaction = DB::table('transactions')
+            ->select('id', 'type', 'amount')
+            ->where('transactions.user_id',$data->id)
+            ->get();               
+            return view('home',compact('data','transaction'));
         }else{
             return redirect('/login');
         }
@@ -34,15 +42,13 @@ class UserController extends Controller
        $password = $request->get('password');
        $user = User::where('email', $email)
                 ->where('password',$password)               
-                ->first();
-       
+                ->first();      
         if($user){
         session(['user'=>$user]);
         $user = $request->session()->all();
-        return view('home',compact($user));
+        return redirect()->route('users.index',compact($user));
         }else{
-           return back(); 
-        }
+echo "<script>alert('Login Failed ! Wrong Username or Password'); window.location='/login'; </script>";        }
 
        
     }
@@ -74,7 +80,8 @@ class UserController extends Controller
     {   
         
         User::create($request->all());
-        return redirect('/login');
+        echo "<script>alert('Registration Success'); window.location='/login'; </script>";
+    
     }
 
     /**

@@ -15,7 +15,7 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->enum('type',['transfer','withdraw','payment','topup']);
+            $table->enum('type',['transfer','topup']);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('amount');

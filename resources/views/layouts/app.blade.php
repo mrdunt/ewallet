@@ -112,7 +112,7 @@
        
          
         <li class="active">
-          <a href="">
+          <a href="{{route('users.index')}}">
             <i class="fa fa-home"></i> <span>Home</span>
             
           </a>
@@ -126,10 +126,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-exchange"></i>Transfer</a></li>
-            <li><a href="#"><i class="fa fa-money"></i> Withdraw</a></li>
-             <li><a href="#"><i class="fa fa-credit-card"></i> Payment</a></li>
-              <li><a href="#"><i class="fa fa-bank"></i> Topup</a></li>            
+            <li><a href="{{route('users.transfer')}}"><i class="fa fa-exchange"></i>Transfer</a></li>
+              <li><a href="{{route('users.topup')}}"><i class="fa fa-bank"></i> Topup</a></li>            
           </ul>
         </li>
        

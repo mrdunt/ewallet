@@ -36,7 +36,7 @@
 			                  {{Session::get('user')->email}}
 			                </li>
 			                 <li class="list-group-item">
-			                  <b>Balance</b> <a class="pull-right">{{Session::get('user')->balance}}</a>
+			                  <b>Balance</b> <a class="pull-right">{{$data->balance}}</a>
 			                </li>
 
 			             
@@ -52,16 +52,25 @@
 		            </ul>	
 				<div class="tab-content">
 					<div class="active tab-pane" id="activity">
-						 <div class="post">
-		                 <ul class="list-group list-group-unbordered">
-			                <li class="list-group-item">
-			                  <strong><i class="fa fa-user-secret margin-r-5"></i>Name</strong>
-						              <p class="text-muted">
-						              Nama
-						              </p>
-			                </li>
-			                
-			              </ul>  
+						<div class="post">
+		                 	<div class="box-body table-responsive no-padding">
+              					<table class="table table-hover">
+              						<thead>
+              							<th>Id</th>
+              							<th>Type Transaction</th>
+              							<th>Amount</th>
+              						</thead>
+              						<tbody>
+              							@foreach ($transaction as $transaction)
+							        <tr>
+							            <td>{{$transaction->id}}</td>
+							            <td>{{ $transaction->type}}</td>
+							            <td>{{ $transaction->amount}}</td>
+							         </tr>
+							         @endforeach
+              						</tbody>
+              					</table>
+         					 </div>
                          
 		                  </div>
 					</div>
